@@ -21,6 +21,11 @@ textarea{
   border-bottom: 10px solid black;
 }
 
+#clock{
+  background-color: #06AED5;
+  color: snow;
+  
+}
 .description{
   white-space: pre-wrap;
 }
