@@ -27,16 +27,22 @@ console.log(moment().format("h A"));
 //           Save
 //         </button>
 //       </div>}
-//TODO: show time on top of calendar. Using moment.js, grab time and set the text of the p tag with the ID of current day to be the time from moment.js
-document.querySelector("#clock").
+//show time on top of calendar. Using moment.js, grab time and set the text of the p tag with the ID of current day to be the time from moment.js
+            
 
+            function currentTime (){
 
+                var timeNow = document.querySelector("#clock")
+                var realTime = moment().format("h:m:ss:a");
+                timeNow.textContent = "Current time: " + realTime;
+            }
 
+            setInterval(currentTime, 1000);
+            currentTime();
 
+//TODO: create an array that holds the standard business time e.g. ["9am", "10am", "11am", ].
+var bizTime = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
 
-
-
-//TODO: create an array that holds the standard business time e.g. ["9am", "10am", "11am", ]. 
 //TODO: create a for loop
 //TODO: Use a for loop to loop over array of hours then create a div for row, each hour, textarea and buttons 
 
