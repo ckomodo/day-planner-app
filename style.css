@@ -4,13 +4,15 @@ body {
   line-height: 1;
 }
 
-textarea{
-  background: transparent;
+.textAreaStyle{
+  background: rgb(194, 188, 188);
   border: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
+  border: 1px solid black;
   padding: 10px;
+  display: flex;
+  width: 95%;
 }
 
 .jumbotron {
@@ -68,6 +70,7 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  float: right;
 }
 
 .saveBtn i:hover {
