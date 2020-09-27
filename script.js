@@ -1,41 +1,50 @@
 var myContainer = $(".container");
-var textAreaElement = $("<textarea>");
-var userText = $(".textAreaStyle");
-var btnElement = $("<button>");
+var currentHour = parseInt(moment().format("H"));
 
+function currentTime() {
+    var timeNow = document.querySelector("#clock");
+    var realTime = moment().format("MM/DD/YYYY hh:mm:ss:a");
+    timeNow.textContent = "Current time: " + realTime;
+}
 
-            
+var bizTime = ["9am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm"];
 
-            function currentTime (){
+for (var i = 0; i < bizTime.length; i++) {
+    var task = localStorage.getItem(bizTime[i]);
+    var timeBlock = $("<div>");
+    var hour = $("<div>");
+    var description = $("<textarea>");
+    var saveBtn = $ ("<button>");
 
-                var timeNow = document.querySelector("#clock");
-                var realTime = moment().format("hh:mm:ss:a");
-                timeNow.textContent = "Current time: " + realTime;
-            }
+    // timeBlock.attr("class", "row time-block");
+    timeBlock.addClass("row time-block");
+    hour.addClass("col-md-2 hour");
+    description.addClass("col-md-8 description");
+    saveBtn.addClass("col-md-2 saveBtn");
 
-            setInterval(currentTime, 1000);
-            currentTime();
+    hour.text(bizTime[i]);
+    description.val(task);
+    saveBtn.text("save");
 
+    myContainer.append(timeBlock);
+    timeBlock.append(hour);
+    timeBlock.append(description);
+    timeBlock.append(saveBtn);
 
+    if (i + 9 < currentHour) {
+        description.addClass("past");
+    } else if (currentHour === i + 9) {
+        description.addClass("present");
+    } else if (i + 9 > currentHour) {
+        description.addClass("future");
+    }
+}
 
-            var bizTime = ["9am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm"]; 
+myContainer.on("click", ".saveBtn", function (event) {
+    var task = $(this).siblings(".description").val()
+    var hour = $(this).siblings(".hour").text();
+    localStorage.setItem(hour, task);
+})
 
-            for(i=0; i<bizTime.length; i++){
-
-                var textAreaElement = $("<textarea>");
-                var btnElement = $("<button>");
-        
-                textAreaElement.attr("class", "textAreaStyle", "row");
-                myContainer.append(textAreaElement, btnElement);
-                myContainer.append(bizTime[i])
-
-                btnElement.text("save");
-                btnElement.attr("class", "saveBtn");
-                myContainer.append(btnElement);
-            }
-
-
-            myContainer.on("click", btnElement, function (event){
-            var userTextArea = $(this).siblings("textarea");
-                
-            })
+currentTime();
+setInterval(currentTime, 1000);
